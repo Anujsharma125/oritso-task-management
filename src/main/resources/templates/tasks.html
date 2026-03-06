@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Task Management</title>
+<link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+
+<h2>Task Management System</h2>
+
+<a th:href="@{/tasks/new}" class="btn">Add New Task</a>
+
+<br><br>
+
+<form th:action="@{/tasks/search}" method="get">
+<input type="text" name="keyword" placeholder="Search by title" th:value="${keyword}">
+<button type="submit">Search</button>
+<a th:href="@{/}">Reset</a>
+</form>
+
+<br>
+
+<table>
+
+<tr>
+<th>ID</th>
+<th>Title</th>
+<th>Description</th>
+<th>Due Date</th>
+<th>Status</th>
+<th>Remarks</th>
+<th>Created By</th>
+<th>Actions</th>
+</tr>
+
+<tr th:each="t : ${tasks}">
+<td th:text="${t.id}"></td>
+<td th:text="${t.title}"></td>
+<td th:text="${t.description}"></td>
+<td th:text="${t.dueDate}"></td>
+<td th:text="${t.status}"></td>
+<td th:text="${t.remarks}"></td>
+<td th:text="${t.createdBy}"></td>
+
+<td>
+<a th:href="@{/tasks/edit/{id}(id=${t.id})}" class="btn edit">Edit</a>
+<a th:href="@{/tasks/delete/{id}(id=${t.id})}" class="btn delete">Delete</a>
+</td>
+
+</tr>
+
+</table>
+
+</body>
+</html>

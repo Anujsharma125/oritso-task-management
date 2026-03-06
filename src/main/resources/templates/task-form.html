@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<title>Task Form</title>
+
+<style>
+body{
+    font-family: Arial;
+    margin:20px;
+}
+input,textarea,select{
+    width:400px;
+    padding:8px;
+    margin-bottom:10px;
+}
+button{
+    padding:8px 12px;
+}
+</style>
+
+</head>
+
+<body>
+
+<h2 th:text="${task.id == null} ? 'Add Task' : 'Edit Task'"></h2>
+
+<form th:action="@{/tasks}" th:object="${task}" method="post">
+
+<input type="hidden" th:field="*{id}">
+
+<label>Title</label><br>
+<input type="text" th:field="*{title}" required>
+
+<br>
+
+<label>Description</label><br>
+<textarea th:field="*{description}"></textarea>
+
+<br>
+
+<label>Due Date</label><br>
+<input type="date" th:field="*{dueDate}">
+
+<br>
+
+<label>Status</label><br>
+<select th:field="*{status}">
+<option value="Pending">Pending</option>
+<option value="Completed">Completed</option>
+</select>
+
+<br>
+
+<label>Remarks</label><br>
+<input type="text" th:field="*{remarks}">
+
+<br>
+
+<label>Created By</label><br>
+<input type="text" th:field="*{createdBy}">
+
+<br>
+
+<label>Last Updated By</label><br>
+<input type="text" th:field="*{lastUpdatedBy}">
+
+<br>
+
+<button type="submit">Save Task</button>
+
+<a th:href="@{/}">Back</a>
+
+</form>
+
+</body>
+</html>
